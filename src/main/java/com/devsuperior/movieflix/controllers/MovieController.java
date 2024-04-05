@@ -2,6 +2,7 @@ package com.devsuperior.movieflix.controllers;
 
 import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,4 +34,5 @@ public class MovieController {
         MovieDetailsDTO dto = movieService.searchById(id);
         return ResponseEntity.ok().body(dto);
     }
+
 }

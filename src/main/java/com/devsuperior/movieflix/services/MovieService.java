@@ -2,7 +2,9 @@ package com.devsuperior.movieflix.services;
 
 import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
@@ -31,5 +33,6 @@ public class MovieService {
                 .orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new MovieDetailsDTO(entity);
     }
+
 
 }
