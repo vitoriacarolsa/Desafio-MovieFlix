@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/movies")
 public class MovieController {
@@ -33,6 +35,12 @@ public class MovieController {
     public ResponseEntity<MovieDetailsDTO> searchById(@PathVariable Long id) {
         MovieDetailsDTO dto = movieService.searchById(id);
         return ResponseEntity.ok().body(dto);
+    }
+    @PreAuthorize("hasAnyRole('ROLE_VISITOR', 'ROLE_MEMBER')")
+    @GetMapping("/{idMovie}/reviews")
+    public ResponseEntity<List<ReviewDTO>> findReviewsMovieId(@PathVariable Long idMovie) {
+        List<ReviewDTO> reviews = movieService.findReviewsMovieId(idMovie);
+        return ResponseEntity.ok().body(reviews);
     }
 
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -32,6 +33,13 @@ public class MovieService {
         Movie entity = movieRepository.searchById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return new MovieDetailsDTO(entity);
+    }
+
+    @Transactional
+    public List<ReviewDTO> findReviewsMovieId(Long idMovie) {
+        Optional<Movie> movieOptional = movieRepository.findById(idMovie);
+        Movie movie = movieOptional.orElseThrow(() -> new ResourceNotFoundException("Movie not found!"));
+        return movie.getReviews().stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
     }
 
 
